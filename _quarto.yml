@@ -6,11 +6,11 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "A Comprehensive Study on Particulate Matter Pollution"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
+    - Zhiyi Li (zl2740)
+    - Xuanyang Lin (xl3352)
+  repo-url: https://github.com/xlin1662/air_pollution_study
   date: today
   page-footer:
     right: |
