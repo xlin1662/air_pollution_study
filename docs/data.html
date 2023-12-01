@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,7 +91,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -110,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -124,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">A Comprehensive Study on Particulate Matter Pollution</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/xlin1662/air_pollution_study" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/xlin1662/air_pollution_study" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -175,8 +176,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="header-section-number">2.1</span> Description</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</a></li>
+  <li><a href="#technical-description" id="toc-technical-description" class="nav-link active" data-scroll-target="#technical-description"><span class="header-section-number">2.1</span> Technical description</a></li>
+  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="header-section-number">2.2</span> Research plan</a></li>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/xlin1662/air_pollution_study/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/xlin1662/air_pollution_study/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -200,11 +202,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>The dataset we use is called modeled exposure to particulate matter air pollution, which aggregates the concentration of the fine particulate matter (PM 2.5) in 194 over the world. In particular, it includes the annual concentration of PM 2.5 in 194 countries, with breakdown for urban and rural areas. The dataset is authored by the World Health Organization (WHO). In general, to obtain estimates of PM 2.5 levels, the concentration of PM 2.5 is measured from fixed-site monitors located within metropolitan areas. The value of PM 2.5 in a given area can be obtained by averaging the measurements of monitors in this area.</p>
+<section id="technical-description" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical description</h2>
+<p>The dataset we use is called modeled exposure to particulate matter air pollution, that aggregates the concentration of the fine particulate matter (PM 2.5) in 194 over the world. In particular, it includes the annual concentration of PM 2.5 in 194 countries, with breakdown for urban and rural areas. The dataset is authored by the World Health Organization (WHO). In general, to obtain estimates of PM 2.5 levels, the concentration of PM 2.5 is measured from fixed-site monitors located within metropolitan areas. The value of PM 2.5 in a given area can be obtained by averaging the measurements of monitors in this area.</p>
 <p>Our dataset includes the average annual PM 2.5 concentration on 194 states from 2010 to 2019. Apart from the average value over the country, the dataset also records the averages on four different area types: urban, rural, cities and towns. The dataset consists of 34 variables in total. Not all of them will be valuable to us, but relevant features include country, location (continent), period (year), area type (detailed below), and value (PM 2.5 concentration). There are 9450 observations, each recording the average annual concentration of PM 2.5 for a specific area type (urban, rural, cities, towns, total) of one of the 194 states in the world.</p>
-<section id="description" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
-<p>The data provides us comprehensive information about the mean, minimum, and max PM2.5 at each residence area type, country, continent from 2010 to 2019. Here are some ways that I’m going to use to analyze the data based on our needs.</p>
+<p>We obtain the data from the WHO official website. A CSV file can be downloaded from <a href="https://www.who.int/data/gho/data/themes/air-pollution/modelled-exposure-of-pm-air-pollution-exposure">this link</a>. The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.</p>
+</section>
+<section id="research-plan" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.2</span> Research plan</h2>
+<p>The data provides us with comprehensive information about the mean, minimum, and max PM2.5 at each residence area type, country, continent from 2010 to 2019. Here are some ways that I’m going to use to analyze the data based on our needs.</p>
 <ol type="1">
 <li>Pre-processing:
 <ol type="a">
@@ -231,8 +237,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Putting it all together, there are 3 dimensions that we are going to analyze the data, at the end, based on what we observe from the visualizations above, we will use any package that we learned from class to dive deeper into the detail to analyze the abnormality or general trends to validate our hypothesis and make the analysis comprehensive.</li>
 </ol>
 </section>
-<section id="missing-value-analysis" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</h2>
+<section id="missing-value-analysis" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</h2>
 <p>Let’s look at our data and understand it. We only have 1 dataset with 34 columns and 9450 rows. We first check if there are any columns that have no useful information for our analysis and select the ones that are useful for us.</p>
 <p>The second step is to check if the remaining columns have any missing or incorrect values and adjust them. Here are the breakdown steps:</p>
 <div class="cell">
