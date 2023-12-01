@@ -1,15 +1,17 @@
 # Data
 
+## Technical description
+
 The dataset we use is called modeled exposure to particulate matter air pollution, that aggregates the concentration of the fine particulate matter (PM 2.5) in 194 over the world. In particular, it includes the annual concentration of PM 2.5 in 194 countries, with breakdown for urban and rural areas. The dataset is authored by the World Health Organization (WHO). In general, to obtain estimates of PM 2.5 levels, the concentration of PM 2.5 is measured from fixed-site monitors located within metropolitan areas. The value of PM 2.5 in a given area can be obtained by averaging the measurements of monitors in this area.
 
 Our dataset includes the average annual PM 2.5 concentration on 194 states from 2010 to 2019.  Apart from the average value over the country, the dataset also records the averages on four different area types: urban, rural, cities and towns. The dataset consists of 34 variables in total. Not all of them will be valuable to us, but relevant features include country, location (continent), period (year), area type (detailed below), and value (PM 2.5 concentration). There are 9450 observations, each recording the average annual concentration of PM 2.5 for a specific area type (urban, rural, cities, towns, total) of one of the 194 states in the world.
 
-We obtain the data from the WHO official website. A CSV file can be downloaded from this link. The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.
+We obtain the data from the WHO official website. A CSV file can be downloaded from [this link](https://www.who.int/data/gho/data/themes/air-pollution/modelled-exposure-of-pm-air-pollution-exposure). The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.
 
 
-## Description
+## Research plan
 
-The data provides us comprehensive information about the mean, minimum, and max PM2.5 at each residence area type, country, continent from 2010 to 2019. Here are some ways that I’m going to use to analyze the data based on our needs.
+The data provides us with comprehensive information about the mean, minimum, and max PM2.5 at each residence area type, country, continent from 2010 to 2019. Here are some ways that I’m going to use to analyze the data based on our needs.
 
 1. Pre-processing:
     a. Remove unneeded value and handle NaN value.
