@@ -80,8 +80,10 @@ After double-checking our dataset, we found these data could be removed. We then
 ```{r}
 
 # check for NaN
-selected_columns <- setdiff(colnames(data), colnames(insignificant_data))
+selected_columns <- setdiff(colnames(data), insignificant_data$ColumnName)
 selected_data <- data %>% select(all_of(selected_columns))
+
+selected_data
 
 nan_counts <- sapply(selected_data, function(x) sum(is.nan(x)))
 
@@ -89,3 +91,9 @@ nan_counts
 ```
 
 We can conclude that there is no missing value in the data we selected. 
+
+```{r}
+
+# Write data to csv
+write.csv(selected_data, file = "selected_data.csv")
+```
