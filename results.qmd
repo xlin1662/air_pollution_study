@@ -1,1 +1,96 @@
 # Results
+
+Pre-analysis:
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# Read data
+df <- read_csv("selected_data.csv")
+```
+
+1. Change for last 10 years
+```{r}
+data <- data %>%
+  group_by(Period) %>%
+  mutate(YearlyE = mean(FactValueNumeric))
+            
+ggplot(data, aes(x = Period, y = YearlyE)) +
+  geom_line() +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(title = "Average PM2.5 Emission by Year",
+       x = "Year",
+       y = "Avg PM2.5 Worldwide") +
+   scale_x_continuous(breaks = seq(min(data$Period), max(data$Period), by = 1))
+```
+
+We can clearly see the PM2.5 emission is generally decreasing over years.
+
+2. Change over time for different continents.
+
+```{r}
+data <- data %>%
+  group_by(ParentLocation, Period) %>%
+  mutate(YearlyContE = mean(FactValueNumeric)) %>%
+  ungroup()
+            
+ggplot(data, aes(x = Period, y = YearlyContE, color = ParentLocation)) +
+  geom_line() +
+  geom_point(size = 1) +
+  theme_minimal() +
+  labs(title = "Average PM2.5 Emission by Year",
+       x = "Year",
+       y = "Avg PM2.5 per Continent") +
+   scale_x_continuous(breaks = seq(min(data$Period), max(data$Period), by = 1))
+```
+
+It is clear that Europe has the most significant decrease in the world while Africa and Eastern Mediterranean has a stable PM2.5 over last 10 years.
+
+
+```{r}
+ggplot(data, aes(x = Period, y = YearlyContE)) +
+  geom_boxplot() + 
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 1, color = "blue") +
+  facet_wrap(~ ParentLocation) + 
+  theme_minimal() +
+  labs(title = "PM2.5 Emission",
+       x = "Year",
+       y = "PM2.5 Range per Continent")
+```
+The boxplots further shows that Europe has the largest variation across years, which corresponds to our observation for previous plot, while Africa and Eastern Mediterranean has a stable PM2.5 since the length of boxplot is small.
+
+3. Continent Correlation
+
+```{r}
+data <- data %>%
+  group_by(ParentLocation) %>%
+  mutate(ContE = mean(FactValueNumeric)) %>%
+  ungroup()
+
+data <- data %>%
+  group_by(Location) %>%
+  mutate(LocE = mean(FactValueNumeric)) %>%
+  ungroup()
+
+top_countries <- data %>% distinct(Location, LocE) %>% top_n(10, LocE)
+bot_countries <- data %>% distinct(Location, LocE) %>% top_n(-10, LocE)
+
+ggplot(top_countries, aes(x = reorder(Location, LocE), y = LocE)) +
+  geom_bar(stat = "identity", fill = "#FFCCCC") +
+  coord_flip() +
+  labs(title = "Countries with the Top 10 Highest Avg PM2.5",
+       x = "Country",
+       y = "Average PM2.5") +
+  theme_minimal()
+```
+```{r}
+ggplot(bot_countries, aes(x = reorder(Location, -LocE), y = LocE)) +
+  geom_bar(stat = "identity", fill='lightgreen') +
+  coord_flip() +
+  labs(title = "Countries with the Top 10 Highest Avg PM2.5",
+       x = "Country",
+       y = "Average PM2.5") +
+  theme_minimal()
+```
+
