@@ -6,12 +6,12 @@ library(ggplot2)
 library(dplyr)
 
 # Read data
-df <- read_csv("selected_data.csv")
+df <- read.csv("selected_data.csv")
 ```
 
 1. Change for last 10 years
 ```{r}
-data <- data %>%
+data <- df %>%
   group_by(Period) %>%
   mutate(YearlyE = mean(FactValueNumeric))
             
