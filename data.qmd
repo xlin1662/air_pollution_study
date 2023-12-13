@@ -90,7 +90,7 @@ nan_counts <- sapply(selected_data, function(x) sum(is.nan(x)))
 nan_counts
 ```
 
-We can conclude that there is no missing value in the data we selected. 
+We conclude that there is no missing value in the data we selected. 
 
 ```{r}
 
