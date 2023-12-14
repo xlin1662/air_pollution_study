@@ -21,7 +21,7 @@ ggplot(data, aes(x = Period, y = YearlyE)) +
   theme_minimal() +
   labs(title = "Average PM2.5 Emission [ug/m3] by Year",
        x = "Year",
-       y = "Avg PM2.5 Worldwide [ug/m3]") +
+       y = "Avg PM2.5 [ug/m3] Worldwide") +
    scale_x_continuous(breaks = seq(min(data$Period), max(data$Period), by = 1))
 ```
 
@@ -41,7 +41,7 @@ ggplot(data, aes(x = Period, y = YearlyContE, color = ParentLocation)) +
   theme_minimal() +
   labs(title = "Average PM2.5 Emission [ug/m3] by Year",
        x = "Year",
-       y = "Avg PM2.5 Concentration [ug/m3] per Continent") +
+       y = "Avg PM2.5 in [ug/m3] per Continent") +
    scale_x_continuous(breaks = seq(min(data$Period), max(data$Period), by = 1))
 ```
 
@@ -62,7 +62,7 @@ The boxplots further shows that Europe has the largest variation across years, w
 
 3. Continent Correlation
 
-    This explores the relationship between country and PM2.5 level.
+This explores the relationship between country and PM2.5 level.
 
 ```{r}
 data <- data %>%
@@ -81,7 +81,7 @@ bot_countries <- data %>% distinct(Location, LocE) %>% top_n(-10, LocE)
 ggplot(top_countries, aes(x = reorder(Location, LocE), y = LocE)) +
   geom_bar(stat = "identity", fill = "#FFCCCC") +
   coord_flip() +
-  labs(title = "Countries with the Top 10 Highest Avg PM2.5",
+  labs(title = "Countries with the Top 10 Highest Avg PM2.5 [ug/m3]",
        x = "Country",
        y = "Average PM2.5 [ug/m3]") +
   theme_minimal()
@@ -90,11 +90,37 @@ ggplot(top_countries, aes(x = reorder(Location, LocE), y = LocE)) +
 ggplot(bot_countries, aes(x = reorder(Location, -LocE), y = LocE)) +
   geom_bar(stat = "identity", fill='lightgreen') +
   coord_flip() +
-  labs(title = "Countries with the Top 10 Highest Avg PM2.5",
+  labs(title = "Countries with the Top 10 Highest Avg PM2.5 [ug/m3]",
        x = "Country",
        y = "Average PM2.5 [ug/m3]") +
   theme_minimal()
 ```
+
+These plots shows that the our continent analysis makes sense since countries with the best and worst air quality corresponds with the continent distribution.
+
+Let's further define a 'Polluted Percentage', which is the percentage of countries that have an average PM 2.5 over 2010 to 2019 in each continent. Let's test whether the continent average PM 2.5 is biased by the number of countries.
+
+```{r}
+c_data <- data %>%
+  group_by(ParentLocation) %>%
+  summarize(
+    tc = n(),
+    polluted = sum(FactValueNumeric > 50.0),
+    pec = (polluted / tc) * 100.0
+  )
+
+# Plotting
+ggplot(c_data, aes(x = ParentLocation, y = pec, fill = ParentLocation)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    x = "Continent",
+    y = "Serious Pollution Percentage",
+    title = "Continent Level Pollution Percentage"
+  ) +
+  theme_minimal()
+```
+This corresponds to our previous analysis that Eastern Mediterranean has the highest PM 2.5 level. It also shows that Africa's average air quality was lowered by a small portion of countries which have serious air pollution.
 
 4. Location type
 
@@ -106,7 +132,9 @@ data <- data %>%
   mutate(LotyE = mean(FactValueNumeric)) %>%
   ungroup()
 
-ggplot(data, aes(x = reorder(Dim1, LotyE), y = LotyE/945)) +
+d_data <- unique(data[c("Dim1", "LotyE")])
+
+ggplot(d_data, aes(x = reorder(Dim1, LotyE), y = LotyE, fill=-LotyE)) +
   geom_bar(stat = "identity") +
   labs(title = "Avg PM2.5 level [ug/m3] for different location type",
        x = "Location Type",
@@ -115,4 +143,23 @@ ggplot(data, aes(x = reorder(Dim1, LotyE), y = LotyE/945)) +
 ```
   The result are pretty close but there is a clear evidence Rural and Towns, those places with a smaller population density tend to have a better air quality.
 
+Let's further analyze how location type can be related to continents.
 
+```{r}
+
+data <- data %>%
+  group_by(ParentLocation, Dim1) %>%
+  mutate(CtentD = mean(FactValueNumeric)) %>%
+  ungroup()
+
+d_data <- unique(data[c("ParentLocation", "Dim1", "CtentD")])
+
+ggplot(d_data, aes(x = reorder(Dim1, CtentD), y = CtentD, fill = -CtentD)) + 
+  geom_bar(stat = "identity") + 
+  facet_wrap(~ ParentLocation) +
+  coord_flip() +
+  labs(x = "Location Type", y = "PM2.5 Level [ug/m3]", title = "Avg PM2.5 level [ug/m3] by Continent and Resident Type") +
+  theme_minimal()
+```
+
+The plot reveals that the pattern among different location types for all continents are similar.
