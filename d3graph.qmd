@@ -16,6 +16,12 @@
   <label for="box1">Africa</label>
   <input type="checkbox" name="box2">
   <label for="box2">Americas</label>
+  <input type="checkbox" name="box3">
+  <label for="box3">Europe</label>
+  <input type="checkbox" name="box4">
+  <label for="box4">South-east Asia</label>
+  <input type="checkbox" name="box5">
+  <label for="box5">West Pacific</label>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
