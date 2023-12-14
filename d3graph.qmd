@@ -24,5 +24,17 @@
   <label for="box5">West Pacific</label>
 </div>
 
+<p>
+In previous session, we used line plots to show the changes of PM 2.5 levels over year for each single region (Africa, Americas, Europe, etc.) and overall. However, we might also be interested in the trends of PM 2.5 levels in a subset of regions. So, we made an interactive PM 2.5 plot that provides the user with a flexible tool to understand the relationship between PM 2.5 and location.
+</p>
+
+<p>
+As the static graph, our interactive plot displays the changes of average PM 2.5 levels over time. For this plot, however, we provide a row of check boxes that control what region(s) would be considered. For example, if Africa, Americas and West Pacific are checked, the program behind the scene will compute the average PM 2.5 levels of these regions and plot the dots on the graph. 
+</p>
+
+<p>
+With the option to choose regions, the user is able to explore many different problems. 
+</p>
+
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="scripts/scatterplot.js"></script>
