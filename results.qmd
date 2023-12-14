@@ -94,3 +94,18 @@ ggplot(bot_countries, aes(x = reorder(Location, -LocE), y = LocE)) +
   theme_minimal()
 ```
 
+```{r}
+data <- data %>%
+  group_by(Dim1) %>%
+  mutate(LotyE = mean(FactValueNumeric)) %>%
+  ungroup()
+
+data
+
+ggplot(data, aes(x = reorder(Dim1, LotyE), y = LotyE/945)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Avg PM2.5 level for different location type",
+       x = "Location Type",
+       y = "Average PM2.5") +
+  theme_minimal()
+```
