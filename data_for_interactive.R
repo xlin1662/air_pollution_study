@@ -30,7 +30,7 @@ df_to_coords <- function(data){
 df_to_coords(df[df$ParentLocation=="Africa",])
 df_to_coords(df[df$ParentLocation=="Americas",])
 df_to_coords(df[df$ParentLocation=="Europe",])
-df_to_coords(df[df$ParentLocation=="Eastern Mediterrianen",])
+df_to_coords(df[df$ParentLocation=="Eastern Mediterranean",])
 df_to_coords(df[df$ParentLocation=="South-East Asia",])
 df_to_coords(df[df$ParentLocation=="Western Pacific",])
 

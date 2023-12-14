@@ -337,6 +337,49 @@ Attaching package: 'dplyr'</code></pre>
 <p><img src="results_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dim1) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">LotyE =</span> <span class="fu">mean</span>(FactValueNumeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9,450 × 18
+       X ParentLocationCode ParentLocation SpatialDimValueCode Location   Period
+   &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;               &lt;chr&gt;       &lt;int&gt;
+ 1     1 AFR                Africa         KEN                 Kenya        2019
+ 2     2 AMR                Americas       TTO                 Trinidad …   2019
+ 3     3 EUR                Europe         GBR                 United Ki…   2019
+ 4     4 AMR                Americas       GRD                 Grenada      2019
+ 5     5 AMR                Americas       BRA                 Brazil       2019
+ 6     6 EUR                Europe         DNK                 Denmark      2019
+ 7     7 EUR                Europe         RUS                 Russian F…   2019
+ 8     8 EUR                Europe         ESP                 Spain        2019
+ 9     9 AMR                Americas       GRD                 Grenada      2019
+10    10 AMR                Americas       GRD                 Grenada      2019
+# ℹ 9,440 more rows
+# ℹ 12 more variables: IsLatestYear &lt;lgl&gt;, Dim1 &lt;chr&gt;, Dim1ValueCode &lt;chr&gt;,
+#   FactValueNumeric &lt;dbl&gt;, FactValueNumericLow &lt;dbl&gt;,
+#   FactValueNumericHigh &lt;dbl&gt;, Value &lt;chr&gt;, YearlyE &lt;dbl&gt;, YearlyContE &lt;dbl&gt;,
+#   ContE &lt;dbl&gt;, LocE &lt;dbl&gt;, LotyE &lt;dbl&gt;</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Dim1, LotyE), <span class="at">y =</span> LotyE<span class="sc">/</span><span class="dv">945</span>)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Avg PM2.5 level for different location type"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Location Type"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average PM2.5"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 
