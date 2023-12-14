@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical description</h2>
 <p>The dataset we use is called modeled exposure to particulate matter air pollution, that aggregates the concentration of the fine particulate matter (PM 2.5) in 194 over the world. In particular, it includes the annual concentration of PM 2.5 in 194 countries, with breakdown for urban and rural areas. The dataset is authored by the World Health Organization (WHO). In general, to obtain estimates of PM 2.5 levels, the concentration of PM 2.5 is measured from fixed-site monitors located within metropolitan areas. The value of PM 2.5 in a given area can be obtained by averaging the measurements of monitors in this area.</p>
 <p>Our dataset includes the average annual PM 2.5 concentration on 194 states from 2010 to 2019. Apart from the average value over the country, the dataset also records the averages on four different area types: urban, rural, cities and towns. The dataset consists of 34 variables in total. Not all of them will be valuable to us, but relevant features include country, location (continent), period (year), area type (detailed below), and value (PM 2.5 concentration). There are 9450 observations, each recording the average annual concentration of PM 2.5 for a specific area type (urban, rural, cities, towns, total) of one of the 194 states in the world.</p>
-<p>We obtain the data from the WHO official website. A CSV file can be downloaded from <a href="https://www.who.int/data/gho/data/themes/air-pollution/modelled-exposure-of-pm-air-pollution-exposure">this link</a>. The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.</p>
+<p>We obtain the data from the WHO official website. A CSV file can be downloaded from <a href="https://www.who.int/data/gho/data/themes/air-pollution/modelled-exposure-of-pm-air-pollution-exposure">here</a>. The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.</p>
 </section>
 <section id="research-plan" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.2</span> Research plan</h2>
@@ -296,7 +296,8 @@ dttm  (1): DateModified
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the number of distinct values per column in our dataset</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> ColumnName, <span class="at">y =</span> DistinctCount)) <span class="sc">+</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column Name"</span>, <span class="at">y =</span> <span class="st">"# of distinct values"</span>, <span class="at">title =</span> <span class="st">"Check distinct values"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column Name"</span>, <span class="at">y =</span> <span class="st">"# of distinct values"</span>, <span class="at">title =</span> <span class="st">"Check distinct values"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
@@ -307,9 +308,8 @@ dttm  (1): DateModified
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check insignificant data</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>insignificant_data <span class="ot">&lt;-</span> long_data <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">filter</span>(DistinctCount <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>insignificant_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>insignificant_data <span class="ot">&lt;-</span> long_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DistinctCount <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>insignificant_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 22 × 2
@@ -374,12 +374,69 @@ dttm  (1): DateModified
                    0                    0                    0 </code></pre>
 </div>
 </div>
+<p>Missing pattern analysis for numeric columns (no missing data).</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: stats4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>mi (Version 1.1, packaged: 2022-06-05 05:31:15 UTC; ben)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>mi  Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015 Trustees of Columbia University</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This program comes with ABSOLUTELY NO WARRANTY.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is free software, and you are welcome to redistribute it</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>under the General Public License version 2 or later.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Execute RShowDoc('COPYING') for details.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'mi'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:tidyr':
+
+    complete</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">missing_data.frame</span>(<span class="fu">as.data.frame</span>(<span class="fu">subset</span>(data, <span class="at">select=</span><span class="fu">c</span>(FactValueNumeric, FactValueNumericHigh, FactValueNumericLow))))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <p>We conclude that there is no missing value in the data we selected.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write data to csv</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(selected_data, <span class="at">file =</span> <span class="st">"selected_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write data to csv</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(selected_data, <span class="at">file =</span> <span class="st">"selected_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

@@ -6,7 +6,7 @@ The dataset we use is called modeled exposure to particulate matter air pollutio
 
 Our dataset includes the average annual PM 2.5 concentration on 194 states from 2010 to 2019.  Apart from the average value over the country, the dataset also records the averages on four different area types: urban, rural, cities and towns. The dataset consists of 34 variables in total. Not all of them will be valuable to us, but relevant features include country, location (continent), period (year), area type (detailed below), and value (PM 2.5 concentration). There are 9450 observations, each recording the average annual concentration of PM 2.5 for a specific area type (urban, rural, cities, towns, total) of one of the 194 states in the world.
 
-We obtain the data from the WHO official website. A CSV file can be downloaded from [this link](https://www.who.int/data/gho/data/themes/air-pollution/modelled-exposure-of-pm-air-pollution-exposure). The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.
+We obtain the data from the WHO official website. A CSV file can be downloaded from [here](https://www.who.int/data/gho/data/themes/air-pollution/modelled-exposure-of-pm-air-pollution-exposure). The file is ready-to-use, requiring only a “read.csv” function to be loaded into RStudio. We will perform data cleaning (eliminating redundant variables and dealing with NAs) and analysis using this file.
 
 
 ## Research plan
@@ -61,6 +61,7 @@ long_data <- pivot_longer(distinct_counts, cols = everything(), names_to = "Colu
 # plot the number of distinct values per column in our dataset
 ggplot(long_data, aes(x = ColumnName, y = DistinctCount)) +
   geom_bar(stat = "identity") +
+  coord_flip()+
   labs(x = "Column Name", y = "# of distinct values", title = "Check distinct values")
 
 ```
@@ -70,8 +71,7 @@ We can see a lot of columns have a few distinct value, let's check if they equal
 ```{r}
 
 # check insignificant data
-insignificant_data <- long_data %>% 
-                               filter(DistinctCount <= 1)
+insignificant_data <- long_data %>% filter(DistinctCount <= 1)
 insignificant_data
 ```
 
@@ -88,6 +88,15 @@ selected_data
 nan_counts <- sapply(selected_data, function(x) sum(is.nan(x)))
 
 nan_counts
+```
+
+
+Missing pattern analysis for numeric columns (no missing data).
+
+```{r}
+library(mi)
+x <- missing_data.frame(as.data.frame(subset(data, select=c(FactValueNumeric, FactValueNumericHigh, FactValueNumericLow))))
+image(x)
 ```
 
 We conclude that there is no missing value in the data we selected. 

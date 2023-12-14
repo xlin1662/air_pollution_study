@@ -19,9 +19,9 @@ ggplot(data, aes(x = Period, y = YearlyE)) +
   geom_line() +
   geom_point(size = 2) +
   theme_minimal() +
-  labs(title = "Average PM2.5 Emission by Year",
+  labs(title = "Average PM2.5 Emission [ug/m3] by Year",
        x = "Year",
-       y = "Avg PM2.5 Worldwide") +
+       y = "Avg PM2.5 Worldwide [ug/m3]") +
    scale_x_continuous(breaks = seq(min(data$Period), max(data$Period), by = 1))
 ```
 
@@ -39,9 +39,9 @@ ggplot(data, aes(x = Period, y = YearlyContE, color = ParentLocation)) +
   geom_line() +
   geom_point(size = 1) +
   theme_minimal() +
-  labs(title = "Average PM2.5 Emission by Year",
+  labs(title = "Average PM2.5 Emission [ug/m3] by Year",
        x = "Year",
-       y = "Avg PM2.5 per Continent") +
+       y = "Avg PM2.5 Concentration [ug/m3] per Continent") +
    scale_x_continuous(breaks = seq(min(data$Period), max(data$Period), by = 1))
 ```
 
@@ -54,13 +54,15 @@ ggplot(data, aes(x = Period, y = YearlyContE)) +
   stat_summary(fun = mean, geom = "point", shape = 20, size = 1, color = "blue") +
   facet_wrap(~ ParentLocation) + 
   theme_minimal() +
-  labs(title = "PM2.5 Emission",
+  labs(title = "PM2.5 Emission [ug/m3]",
        x = "Year",
-       y = "PM2.5 Range per Continent")
+       y = "PM2.5 [ug/m3] Range per Continent")
 ```
 The boxplots further shows that Europe has the largest variation across years, which corresponds to our observation for previous plot, while Africa and Eastern Mediterranean has a stable PM2.5 since the length of boxplot is small.
 
 3. Continent Correlation
+
+    This explores the relationship between country and PM2.5 level.
 
 ```{r}
 data <- data %>%
@@ -81,7 +83,7 @@ ggplot(top_countries, aes(x = reorder(Location, LocE), y = LocE)) +
   coord_flip() +
   labs(title = "Countries with the Top 10 Highest Avg PM2.5",
        x = "Country",
-       y = "Average PM2.5") +
+       y = "Average PM2.5 [ug/m3]") +
   theme_minimal()
 ```
 ```{r}
@@ -90,9 +92,13 @@ ggplot(bot_countries, aes(x = reorder(Location, -LocE), y = LocE)) +
   coord_flip() +
   labs(title = "Countries with the Top 10 Highest Avg PM2.5",
        x = "Country",
-       y = "Average PM2.5") +
+       y = "Average PM2.5 [ug/m3]") +
   theme_minimal()
 ```
+
+4. Location type
+
+  This part, let's explore the relationship between the 4 main resident types, Town, Rural, Urban, and Cities, and PM2.5 level.
 
 ```{r}
 data <- data %>%
@@ -100,12 +106,13 @@ data <- data %>%
   mutate(LotyE = mean(FactValueNumeric)) %>%
   ungroup()
 
-data
-
 ggplot(data, aes(x = reorder(Dim1, LotyE), y = LotyE/945)) +
   geom_bar(stat = "identity") +
-  labs(title = "Avg PM2.5 level for different location type",
+  labs(title = "Avg PM2.5 level [ug/m3] for different location type",
        x = "Location Type",
-       y = "Average PM2.5") +
+       y = "Average PM2.5 [ug/m3]") +
   theme_minimal()
 ```
+  The result are pretty close but there is a clear evidence Rural and Towns, those places with a smaller population density tend to have a better air quality.
+
+
