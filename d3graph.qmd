@@ -9,5 +9,14 @@
 <div id="plot">
 </div>
 
+<svg id="scatter-plot" width="600" height="400"></svg>
+
+<div>
+  <input type="checkbox" name="box1">
+  <label for="box1">Africa</label>
+  <input type="checkbox" name="box2">
+  <label for="box2">Americas</label>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="scripts/myscript.js"></script>
+<script src="scripts/scatterplot.js"></script>
