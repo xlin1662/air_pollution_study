@@ -1,4 +1,4 @@
-# Interactive graph
+# Interactive display
 
 <style>
   * {
@@ -9,5 +9,34 @@
 <div id="plot">
 </div>
 
+<svg id="scatter-plot" width="600" height="400"></svg>
+
+<div>
+  <input type="checkbox" name="box1">
+  <label for="box1">Africa</label>
+  <input type="checkbox" name="box2">
+  <label for="box2">Americas</label>
+  <input type="checkbox" name="box3">
+  <label for="box3">Europe</label>
+  <input type="checkbox" name="box4">
+  <label for="box4">South-east Asia</label>
+  <input type="checkbox" name="box5">
+  <label for="box5">West Pacific</label>
+  <input type="checkbox" name="box6">
+  <label for="box6">Eastern Mediterranean</label>
+</div>
+
+<p>
+In previous session, we used line plots (scatterplot connected with lines) to show the changes of PM 2.5 levels over year for each single region (Africa, Americas, Europe, etc.) and overall. However, we might also be interested in the trends of PM 2.5 levels in a subset of regions. So, we made an interactive PM 2.5 plot that provides the user with a flexible tool to understand the relationship between PM 2.5 and location.
+</p>
+
+<p>
+As the static graph, our interactive plot displays the changes of average PM 2.5 levels over time. For this plot, however, we provide a row of check boxes that control what region(s) would be considered. For example, if Africa, Americas and West Pacific are checked, the program behind the scene will compute the average PM 2.5 levels of these regions and plot the dots on the graph. 
+</p>
+
+<p>
+With the option to choose regions, the user is able to explore various different problems. For example, how is the PM 2.5 level trend for the developed world and how does it compare to the developing world. We check the boxes for Europe and Americas, and we can see that the average PM 2.5 is pretty low in general (15-20) but there is an upward trend of PM 2.5 levels from 2010 to 2019. Checking Africa, South-east Asia, West Pacific and Eastern Mediterranean, we observe that the average PM 2.5 is significantly higher (25-30), but it was basically kept in the same level over the course of ten years. So, the developing world has higher PM 2.5 pollution in general, but the developed countries has experienced an significant increase in PM 2.5 from 2010 to 2019.
+</p>
+
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="scripts/myscript.js"></script>
+<script src="scripts/scatterplot.js"></script>

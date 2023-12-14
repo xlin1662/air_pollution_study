@@ -1,8 +1,8 @@
 # Introduction
 
-In this study, we talk about the air pollution, investigating the various factors that are related to it. Generally speaking, does time and location have a strong correlation with air pollution? The main value we are going to dive into detail is PM 2.5, a number that indicates the amount of particles that are 2.5 microns or less in diameter in air. The higher the value, the more serious the air pollution is.
+In this study, we talk about the air pollution, investigating the various factors that are related to it. Generally speaking, does time and location have a strong correlation with air pollution? The main value we are going to dive into detail is PM 2.5, a number that indicates the amount of particles that are 2.5 microns or less in diameter in air. The higher the value, the more serious the air pollution is since these components there are harmful when inhaled by human, animals, and plants.
 
-In detail, we are going to employ exploratory data analysis to investigate the data from WHO to dive into details about air quality. Some of questions we will answer are below:
+In detail, we are going to employ exploratory data analysis to investigate the data from WHO to dive into details about air quality. Some sample questions we will answer are below:
 
   1. Is the air quality becoming worse from 2010 to 2019, overall and locally?
   2. If people want to avoid air pollution, where should they choose to live?

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>A Comprehensive Study on Particulate Matter Pollution - 4&nbsp; Interactive graph</title>
+<title>A Comprehensive Study on Particulate Matter Pollution - 4&nbsp; Interactive display</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./d3graph.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./d3graph.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive display</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -111,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -123,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./d3graph.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive display</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive display</span></h1>
 </div>
 
 
@@ -168,8 +168,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="plot">
 
 </div>
+<svg id="scatter-plot" width="600" height="400">
+</svg>
+<div>
+<p><input type="checkbox" name="box1"> <label for="box1">Africa</label> <input type="checkbox" name="box2"> <label for="box2">Americas</label> <input type="checkbox" name="box3"> <label for="box3">Europe</label> <input type="checkbox" name="box4"> <label for="box4">South-east Asia</label> <input type="checkbox" name="box5"> <label for="box5">West Pacific</label> <input type="checkbox" name="box6"> <label for="box6">Eastern Mediterranean</label></p>
+</div>
+<p>
+In previous session, we used line plots (scatterplot connected with lines) to show the changes of PM 2.5 levels over year for each single region (Africa, Americas, Europe, etc.) and overall. However, we might also be interested in the trends of PM 2.5 levels in a subset of regions. So, we made an interactive PM 2.5 plot that provides the user with a flexible tool to understand the relationship between PM 2.5 and location.
+</p>
+<p>
+As the static graph, our interactive plot displays the changes of average PM 2.5 levels over time. For this plot, however, we provide a row of check boxes that control what region(s) would be considered. For example, if Africa, Americas and West Pacific are checked, the program behind the scene will compute the average PM 2.5 levels of these regions and plot the dots on the graph.
+</p>
+<p>
+With the option to choose regions, the user is able to explore various different problems. For example, how is the PM 2.5 level trend for the developed world and how does it compare to the developing world. We check the boxes for Europe and Americas, and we can see that the average PM 2.5 is pretty low in general (15-20) but there is an upward trend of PM 2.5 levels from 2010 to 2019. Checking Africa, South-east Asia, West Pacific and Eastern Mediterranean, we observe that the average PM 2.5 is significantly higher (25-30), but it was basically kept in the same level over the course of ten years. So, the developing world has higher PM 2.5 pollution in general, but the developed countries has experienced an significant increase in PM 2.5 from 2010 to 2019.
+</p>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="scripts/myscript.js"></script>
+<script src="scripts/scatterplot.js"></script>
 
 
 
