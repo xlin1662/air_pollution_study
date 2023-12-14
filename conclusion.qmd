@@ -20,5 +20,7 @@ Based on our analysis, time and location all significantly correlates with air p
   6. In the future, can we predict any trend for air quality based on historical data?
     Yes, we predict the air quality will be better for all continent, but based on different policy & condition over continent, the air quality change might be different.
   
+Besides, the interactive graph shows the difference between developing and developed countries: compared to developing world, developed countries tend to have less PM 2.5 problems, but the problem is growing over time. 
+
 In summary, the air quality is getting better and better, while the condition at some urban places at east hemisphere still need to be paid more attention.
     
